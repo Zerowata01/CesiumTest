@@ -10,7 +10,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
     />
-    <title>Hello World!</title>
+    <title>建築物モデル（宇都宮市）</title>
     <script src="../Build/CesiumUnminified/Cesium.js"></script>
     <style>
       @import url(../Build/CesiumUnminified/Widgets/widgets.css);
@@ -28,7 +28,12 @@
   <body>
     <div id="cesiumContainer"></div>
     <script>
-      const viewer = new Cesium.Viewer("cesiumContainer");
+      const viewer = new Cesium.Viewer('cesiumContainer');
+      var your_3d_tiles =viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+      url : 'https://assets.cms.plateau.reearth.io/assets/1f/45fa88-ab0e-45b8-bf59-61ef54d7a723/09201_utsunomiya-shi_2020_3dtiles_3_op_bldg_lod2/tileset.json'
+    }));
+    // ②カメラのズーム
+    viewer.flyTo(your_3d_tiles);
     </script>
   </body>
 </html>
