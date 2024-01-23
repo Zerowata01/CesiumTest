@@ -13,21 +13,26 @@
     // Cesium Ionからアクセストークンを取得：https://cesium.com/ion/tokens
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o';
 
-    const viewer = new Cesium.Viewer("cesiumContainer", {
-      terrainProvider: await Cesium.CesiumTerrainProvider.fromIonAssetId(
-        1
-      ),
+    // B. terrainProviderを設定
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+      terrainProvider: new Cesium.CesiumTerrainProvider({
+          url: Cesium.IonResource.fromAssetId(2430996)
+      })
     });
-    viewer.scene.globe.depthTestAgainstTerrain = true;
 
+    //①建物モデルの追加
+    var your_3d_tiles =viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+      // PLATEAU-3DTilesの配信サービスの配信データを利用
+      url : 'https://assets.cms.plateau.reearth.io/assets/4b/f8d899-86bc-4b31-b792-48da8a85c14b/22213_kakegawa-shi_2020_3dtiles_4_op_bldg_lod1/tileset.json'
+    }));
 
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2430996);
-    viewer.scene.primitives.add(tileset);
-    await viewer.zoomTo(tileset);
-  
+    // const tileset = viewer.scene.primitives.add(
+    //   Cesium.Cesium3DTileset.fromIonAssetId(2430996)
+    // );
 
     // ②カメラのズーム
-    viewer.flyTo(tileset);
+    // viewer.flyTo(your_3d_tiles);
+    viewer.flyTo(viewer);
 
 
   </script>
