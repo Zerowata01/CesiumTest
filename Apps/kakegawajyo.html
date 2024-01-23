@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>点群データ</title>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+    // Cesium Ionからアクセストークンを取得：https://cesium.com/ion/tokens
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o';
+
+    const viewer = new Cesium.Viewer('cesiumContainer');
+
+    // Cesium Ionのアセットから3D Tilesetをロード
+    (async () => {
+      try {
+        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2430996);
+        viewer.scene.primitives.add(tileset);
+        await viewer.zoomTo(tileset);
+
+        // デフォルトのスタイルが存在する場合は適用
+        const extras = tileset.asset.extras;
+        if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+          tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  </script>
+</body>
+</html>
