@@ -46,6 +46,13 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
       })
     }
     );
+
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o";
+
+
+    const tileset = Cesium.Cesium3DTileset.fromIonAssetId(2432409);
+    viewer.scene.primitives.add(tileset);
+
     // const viewer = new Cesium.Viewer('cesiumContainer');
 
     //①建物モデルの追加
