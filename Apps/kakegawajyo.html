@@ -57,12 +57,31 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
     //   })
     // }
     // );
-    const viewer = new Cesium.Viewer('cesiumContainer');
 
-    const tileset = viewer.scene.primitives.add(
-      Cesium.Cesium3DTileset.fromIonAssetId(2432409)
-    );
+const viewer = new Cesium.Viewer("cesiumContainer", {
+  terrainProvider: await Cesium.CesiumTerrainProvider.fromIonAssetId(
+    1
+  ),
+});
+viewer.scene.globe.depthTestAgainstTerrain = true;
 
+try {
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2432409);
+  viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
+
+  // Apply the default style if it exists
+  const extras = tileset.asset.extras;
+  if (
+    Cesium.defined(extras) &&
+    Cesium.defined(extras.ion) &&
+    Cesium.defined(extras.ion.defaultStyle)
+  ) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
+} catch (error) {
+  console.log(error);
+}
 
 
     //①建物モデルの追加
