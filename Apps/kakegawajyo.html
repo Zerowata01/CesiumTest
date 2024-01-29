@@ -42,19 +42,18 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o";
 
 
-// B. terrainProviderを設定
+// Cesium ionにある地形アセットを呼び出す
     const viewer = new Cesium.Viewer('cesiumContainer', {
       terrainProvider: new Cesium.CesiumTerrainProvider({
           url: Cesium.IonResource.fromAssetId(1)
       })
-    }
-    );
+    });
 
     // const tileset = viewer.scene.primitives.add(
     //   await Cesium.Cesium3DTileset.fromIonAssetId(2432409)
     // );
 
-    // Cesium ionにあるアセットを呼び出す 点群データ
+    // Cesium ionにある点群データアセットを呼び出す
     var tileset = viewer.scene.primitives.add(
       new Cesium.Cesium3DTileset({
           url: Cesium.IonResource.fromAssetId(2432409)
