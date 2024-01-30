@@ -21,7 +21,7 @@
       })
     });
 
-    const osmBuildings = new Cesium.createOsmBuildings();
+    const osmBuildings = new Cesium.Cesium.createOsmBuildingsMixin();
     viewer.scene.primitives.add(osmBuildings);
 
     const flightData = JSON.parse(
