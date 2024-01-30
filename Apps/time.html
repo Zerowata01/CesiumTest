@@ -21,7 +21,7 @@
       })
     });
 
-    const osmBuildings = new Cesium.Cesium.createOsmBuildingsMixin();
+    const osmBuildings = new Cesium.createOsmBuildingsMixin();
     viewer.scene.primitives.add(osmBuildings);
 
     const flightData = JSON.parse(
@@ -72,7 +72,7 @@
     // STEP 6 CODE (airplane entity)
     async function loadModel() {
       // Load the glTF model from Cesium ion.
-      const airplaneUri = new Cesium.IonResource.fromAssetId(2439758);
+      const airplaneUri = Cesium.IonResource.fromAssetId(2439758);
       const airplaneEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
         position: positionProperty,
