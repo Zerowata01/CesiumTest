@@ -43,6 +43,8 @@
 
     your_3d_tiles2.style = new Cesium.Cesium3DTileStyle({
       color: 'rgb(0, 0, 255)',
+      heightReference: new Cesium.ConstantProperty(Cesium.HeightReference.RELATIVE_TO_GROUND),
+      height: 30 // オフセットの高さ（必要に応じて調整）
     })
 
 
