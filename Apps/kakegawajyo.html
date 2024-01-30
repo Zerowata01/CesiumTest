@@ -10,39 +10,28 @@
 <body>
   <div id="cesiumContainer"></div>
   <script>
-// Grant CesiumJS access to your ion assets
-// Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o";
 
-// const viewer = new Cesium.Viewer("cesiumContainer", {
-//   terrainProvider: await Cesium.CesiumTerrainProvider.fromIonAssetId(
-//     1
-//   ),
-// });
-// viewer.scene.globe.depthTestAgainstTerrain = true;
+    // 現在のUTCのJulianDateを取得
+    var currentUtcJulianDate = Cesium.JulianDate.now();
 
-// try {
-//   const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2432409);
-//   viewer.scene.primitives.add(tileset);
-//   await viewer.zoomTo(tileset);
+    // タイムゾーンオフセットを追加してJSTのJulianDateに変換
+    var jstOffsetSeconds = 9 * 3600; // JSTはUTC+9なので、9時間分の秒数
+    var jstJulianDate = Cesium.JulianDate.addSeconds(currentUtcJulianDate, jstOffsetSeconds, new Cesium.JulianDate());
 
-//   // Apply the default style if it exists
-//   const extras = tileset.asset.extras;
-//   if (
-//     Cesium.defined(extras) &&
-//     Cesium.defined(extras.ion) &&
-//     Cesium.defined(extras.ion.defaultStyle)
-//   ) {
-//     tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-//   }
-// } catch (error) {
-//   console.log(error);
-// }
+    // JulianDateをJavaScriptのDateに変換
+    var jstDate = Cesium.JulianDate.toDate(jstJulianDate);
 
-// Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5N2UyMjcwOS00MDY1LTQxYjEtYjZjMy00YTU0ZTg5MmViYWQiLCJpZCI6ODAzMDYsImlhdCI6MTY0Mjc0ODI2MX0.dkwAL1CcljUV7NA7fDbhXXnmyZQU_c-G5zRx8PtEcxE';
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o";
+    console.log("UTC JulianDate: ", currentUtcJulianDate);
+    console.log("JST JulianDate: ", jstJulianDate);
+    console.log("JST Date: ", jstDate);
 
 
-// Cesium ionにある地形アセットを呼び出す
+
+    // Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5N2UyMjcwOS00MDY1LTQxYjEtYjZjMy00YTU0ZTg5MmViYWQiLCJpZCI6ODAzMDYsImlhdCI6MTY0Mjc0ODI2MX0.dkwAL1CcljUV7NA7fDbhXXnmyZQU_c-G5zRx8PtEcxE';
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o";
+
+
+    // Cesium ionにある地形アセットを呼び出す
     const viewer = new Cesium.Viewer('cesiumContainer', {
       terrainProvider: new Cesium.CesiumTerrainProvider({
           url: Cesium.IonResource.fromAssetId(1)
