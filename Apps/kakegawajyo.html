@@ -11,25 +11,6 @@
   <div id="cesiumContainer"></div>
   <script>
 
-    // 現在のUTCのJulianDateを取得
-    var currentUtcJulianDate = Cesium.JulianDate.now();
-
-    // タイムゾーンオフセットを追加してJSTのJulianDateに変換
-    var jstOffsetSeconds = 9 * 3600; // JSTはUTC+9なので、9時間分の秒数
-    var jstJulianDate = Cesium.JulianDate.addSeconds(currentUtcJulianDate, jstOffsetSeconds, new Cesium.JulianDate());
-
-    // JulianDateをJavaScriptのDateに変換
-    var jstDate = Cesium.JulianDate.toDate(jstJulianDate);
-
-    console.log("UTC JulianDate: ", currentUtcJulianDate);
-    console.log("JST JulianDate: ", jstJulianDate);
-    console.log("JST Date: ", jstDate);
-
-    // 表示用の要素にカスタム日時を追加
-    var customDateTimeElement = document.getElementById('customDateTime');
-    customDateTimeElement.innerHTML = 'JST Date: ' + jstDate.toString();
-
-
     // Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5N2UyMjcwOS00MDY1LTQxYjEtYjZjMy00YTU0ZTg5MmViYWQiLCJpZCI6ODAzMDYsImlhdCI6MTY0Mjc0ODI2MX0.dkwAL1CcljUV7NA7fDbhXXnmyZQU_c-G5zRx8PtEcxE';
     Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZTBhNDE3Yi03ODRhLTRiNjgtYWNhYS00ZTM3NzA3MjRmODQiLCJpZCI6MTkwNjg4LCJpYXQiOjE3MDU2NDA4MDZ9.ex7kZ3BLLfU88XYqRj0V5pV1JLK9cUsR5IJ3T_9bD1o";
 
